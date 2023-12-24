@@ -11,7 +11,7 @@ services:
     build: ./sender
     container_name: sender
     ports:
-      - "7070:7070"
+      - "7071:7071"
     volumes:
       - ./sender:/app
     depends_on:
@@ -21,7 +21,7 @@ services:
     build: ./receiver
     container_name: receiver
     ports:
-      - "7071:7071"
+      - "7070:7070"
     volumes:
       - ./receiver:/app
     depends_on:
