@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  sender:
+    build: ./sender
+    container_name: sender
+    ports:
+      - "7070:7070"
+    volumes:
+      - ./sender:/app
+    depends_on:
+      - rabbitmq
+
+  receiver:
+    build: ./receiver
+    container_name: receiver
+    ports:
+      - "7071:7071"
+    volumes:
+      - ./receiver:/app
+    depends_on:
+      - sender
+      - rabbitmq
